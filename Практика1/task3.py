@@ -1,13 +1,7 @@
-import sys
-import argparse
-parser = argparse.ArgumentParser(
-    description = 'Чтение файла'
-)
-
-parser.add_argument(
-    'filename',
-    metavar = 'FILE_NAME',
-    type = str,
-    nargs = '+',
-    help = 'входные данные'
-)
+from sys import argv
+for name in argv[1:]:
+    file = open(name,'r')
+    print(file.read())
+    file.close()
+if len(argv) < 2:
+    print('Введите имя хотя бы одного файла')
