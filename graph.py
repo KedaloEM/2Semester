@@ -7,14 +7,6 @@ D = {}
 for line in file.readlines():
     a ,b, weight = line.split()
     a, b, weight = str(a), str(b), int(weight)
-    if a not in D:
-        D[a] = {b:weight}
-    else:
-        D[a][b] = weight
-    if b not in D:
-        D[b] = {a:weight}
-    else:
-        D[b][a] = weight
     G.add_edge(a, b, weight = weight)
 pos = nx.spectral_layout(G)
 elarge = [(u,v) for (u,v,d) in G.edges(data=True) if d['weight'] <=200]
@@ -44,7 +36,7 @@ def get_dfs_tree(G,initial):
                 used.add(m)
                 Q.add_edge(top, m, weight = G[top][m]['weight'])
                 queue.append(m)
-    return (Q,used)
+    return (Q)
 Q = get_dfs_tree(G.dict,'Apple',)
 
 nx.draw_networkx_nodes(Q ,pos,node_size=3000)
