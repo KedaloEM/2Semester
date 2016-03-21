@@ -1,19 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-file = open('graph.txt' , 'r')
-G = {}
 
-for line in file.readlines():
-    a ,b, weight = line.split()
-    a, b, weight = str(a), str(b), int(weight)
-    if a not in G:
-        G[a] = {b:weight}
-    else:
-        G[a][b] = weight
-    if b not in G:
-        G[b] = {a:weight}
-    else:
-        G[b][a] = weight
 
 
 def get_dfs_tree(G,initial):
@@ -30,6 +17,19 @@ def get_dfs_tree(G,initial):
     return (Q)
 
 
+file = open('graph.txt' , 'r')
+G = {}
+for line in file.readlines():
+    a ,b, weight = line.split()
+    a, b, weight = str(a), str(b), int(weight)
+    if a not in G:
+        G[a] = {b:weight}
+    else:
+        G[a][b] = weight
+    if b not in G:
+        G[b] = {a:weight}
+    else:
+        G[b][a] = weight
 Q = get_dfs_tree(G,'Orange')
 pos = nx.spring_layout(Q)
 nx.draw_networkx_nodes(Q ,pos,node_size=70)
